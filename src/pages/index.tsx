@@ -16,7 +16,5 @@ const a = (state: State.State) => {
   if (State.isLoading(state)) {
     return <>Loading...</>;
   }
-  return RegistrationState.isState(state)
-    ? React.createElement(Registration, state)
-    : null;
+  return RegistrationState.isState(state) ? React.createElement(Registration, state) : null;
 };

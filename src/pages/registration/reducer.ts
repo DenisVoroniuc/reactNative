@@ -16,9 +16,7 @@ export const reduce = (s: State.State, a: Actions.Actions): State.State => {
     case Actions.ActionTypes.Submit:
       return State.isReady(s) ? State.saving(s) : s;
     case Actions.ActionTypes.SaveError:
-      return State.isSaving(s)
-        ? State.savingError({ ...s, errorMessage: a.payload })
-        : s;
+      return State.isSaving(s) ? State.savingError({ ...s, errorMessage: a.payload }) : s;
     case Actions.ActionTypes.SaveSuccess:
       return State.isSaving(s) ? State.ready(s) : s;
   }

@@ -18,13 +18,7 @@ export type ReadyPayload = {
 
 export type Ready = GenericState<StateIds.Ready> & ReadyPayload;
 
-export const ready = ({
-  passwordConfirmation,
-  email,
-  firstName,
-  lastName,
-  password,
-}: ReadyPayload): Ready => ({
+export const ready = ({ passwordConfirmation, email, firstName, lastName, password }: ReadyPayload): Ready => ({
   stateID: StateIds.Ready,
   passwordConfirmation,
   email,
@@ -33,11 +27,9 @@ export const ready = ({
   password,
 });
 
-export const isReady = (s: GenericState): s is Ready =>
-  s.stateID === StateIds.Ready;
+export const isReady = (s: GenericState): s is Ready => s.stateID === StateIds.Ready;
 
-export type ValidationError = GenericState<StateIds.ValidationError> &
-  ReadyPayload;
+export type ValidationError = GenericState<StateIds.ValidationError> & ReadyPayload;
 
 export const validationError = ({
   passwordConfirmation,
@@ -54,18 +46,11 @@ export const validationError = ({
   password,
 });
 
-export const isValidationError = (s: GenericState): s is ValidationError =>
-  s.stateID === StateIds.ValidationError;
+export const isValidationError = (s: GenericState): s is ValidationError => s.stateID === StateIds.ValidationError;
 
 export type Saving = GenericState<StateIds.Saving> & ReadyPayload;
 
-export const saving = ({
-  passwordConfirmation,
-  email,
-  firstName,
-  lastName,
-  password,
-}: ReadyPayload): Saving => ({
+export const saving = ({ passwordConfirmation, email, firstName, lastName, password }: ReadyPayload): Saving => ({
   stateID: StateIds.Saving,
   passwordConfirmation,
   email,
@@ -74,13 +59,11 @@ export const saving = ({
   password,
 });
 
-export const isSaving = (s: GenericState): s is Saving =>
-  s.stateID === StateIds.Saving;
+export const isSaving = (s: GenericState): s is Saving => s.stateID === StateIds.Saving;
 
 export type SavingErrorPayload = ReadyPayload & { errorMessage: string };
 
-export type SavingError = GenericState<StateIds.SavingError> &
-  SavingErrorPayload;
+export type SavingError = GenericState<StateIds.SavingError> & SavingErrorPayload;
 
 export const savingError = ({
   passwordConfirmation,
@@ -99,8 +82,7 @@ export const savingError = ({
   password,
 });
 
-export const isSavingError = (s: GenericState): s is SavingError =>
-  s.stateID === StateIds.SavingError;
+export const isSavingError = (s: GenericState): s is SavingError => s.stateID === StateIds.SavingError;
 
 export type SavingSuccess = GenericState<StateIds.SavingSuccess>;
 
@@ -108,15 +90,8 @@ export const savingSuccess = (): SavingSuccess => ({
   stateID: StateIds.SavingSuccess,
 });
 
-export const isSavingSuccess = (s: GenericState): s is SavingSuccess =>
-  s.stateID === StateIds.SavingSuccess;
+export const isSavingSuccess = (s: GenericState): s is SavingSuccess => s.stateID === StateIds.SavingSuccess;
 
-export type State =
-  | Ready
-  | ValidationError
-  | Saving
-  | SavingError
-  | SavingSuccess;
+export type State = Ready | ValidationError | Saving | SavingError | SavingSuccess;
 
-export const isState = (s: GenericState): s is State =>
-  Object.values(StateIds).includes(s.stateID as StateIds);
+export const isState = (s: GenericState): s is State => Object.values(StateIds).includes(s.stateID as StateIds);
