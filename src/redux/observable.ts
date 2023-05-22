@@ -1,7 +1,10 @@
-import { combineEpics } from "redux-observable";
+import { Epic, combineEpics, EpicMiddleware } from "redux-observable";
 import { GenericAction } from "./types";
-import { EMPTY, Observable } from "rxjs";
+import { State } from "./State";
+import { epicCreator as pageEpic } from "../pages/observable";
 
-const qwe = () => EMPTY as Observable<GenericAction>;
+export type GenericEpic = Epic<GenericAction, GenericAction, State, any>;
 
-export const rootEpic = combineEpics(qwe);
+export type GenericEpicMiddleware = EpicMiddleware<GenericAction, GenericAction, State, any>;
+
+export const rootEpic: GenericEpic = combineEpics(pageEpic);

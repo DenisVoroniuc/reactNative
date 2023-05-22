@@ -5,7 +5,6 @@ export enum StateIds {
   ValidationError = "registration:validationError",
   Saving = "registration:saving",
   SavingError = "registration:savingError",
-  SavingSuccess = "registration:savingSuccess",
 }
 
 export type ReadyPayload = {
@@ -84,14 +83,6 @@ export const savingError = ({
 
 export const isSavingError = (s: GenericState): s is SavingError => s.stateID === StateIds.SavingError;
 
-export type SavingSuccess = GenericState<StateIds.SavingSuccess>;
-
-export const savingSuccess = (): SavingSuccess => ({
-  stateID: StateIds.SavingSuccess,
-});
-
-export const isSavingSuccess = (s: GenericState): s is SavingSuccess => s.stateID === StateIds.SavingSuccess;
-
-export type State = Ready | ValidationError | Saving | SavingError | SavingSuccess;
+export type State = Ready | ValidationError | Saving | SavingError;
 
 export const isState = (s: GenericState): s is State => Object.values(StateIds).includes(s.stateID as StateIds);

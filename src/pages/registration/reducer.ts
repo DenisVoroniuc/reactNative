@@ -1,7 +1,8 @@
 import * as Actions from "./types/Actions";
 import * as State from "./types/State";
+import * as LoginState from "../login/types/State";
 
-export const reduce = (s: State.State, a: Actions.Actions): State.State => {
+export const reducer = (s: State.State, a: Actions.Actions): State.State | LoginState.Ready => {
   switch (a.type) {
     case Actions.ActionTypes.SetEmail:
       return State.isReady(s) ? { ...s, email: a.payload } : s;
@@ -19,5 +20,7 @@ export const reduce = (s: State.State, a: Actions.Actions): State.State => {
       return State.isSaving(s) ? State.savingError({ ...s, errorMessage: a.payload }) : s;
     case Actions.ActionTypes.SaveSuccess:
       return State.isSaving(s) ? State.ready(s) : s;
+    case Actions.ActionTypes.GoToLogin:
+      return LoginState.ready();
   }
 };

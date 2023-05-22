@@ -1,20 +1,25 @@
 import React from "react";
-import { useDispatch, useSelector } from "react-redux";
-import * as Actions from "../redux/Actions";
-import * as State from "../redux/State";
+import { useSelector } from "react-redux";
+import * as State from "./types/State";
 import { pageSelector } from "./selector";
-import { Registration } from "./registration/components";
+import { Registration } from "./registration/containers";
 import * as RegistrationState from "./registration/types/State";
+import * as LoginState from "./login/types/State";
 
 export const Page = () => {
   const state = useSelector(pageSelector);
 
-  return React.createElement(a, state);
+  return React.createElement(Pages, state);
 };
 
-const a = (state: State.State) => {
-  if (State.isLoading(state)) {
-    return <>Loading...</>;
+const Pages = (state: State.State) => {
+  if (RegistrationState.isState(state)) {
+    return React.createElement(Registration, state);
   }
-  return RegistrationState.isState(state) ? React.createElement(Registration, state) : null;
+
+  if (LoginState.isState(state)) {
+    return null;
+  }
+
+  return null;
 };
